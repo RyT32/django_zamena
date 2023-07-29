@@ -22,11 +22,10 @@ from lesson_4.views import lesson_4
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls), # ссылка для панели админа
     path('lesson_4/',lesson_4),
     path('', include('app_advertisements.urls'))
 ]
-
 
 
 
