@@ -2,13 +2,7 @@ from django.shortcuts import render # для отправки html по запр
 
 from django.http import HttpResponse
 
-from .models import Cats
 
-def db(request):
-    Cats.objects.create(name = 'котик', age = 6, breed = 'обычный')
-    cats = Cats.objects.get(id = 1)
-
-    return HttpResponse(cats.age)
 
 # функция представление
 def index(request):
