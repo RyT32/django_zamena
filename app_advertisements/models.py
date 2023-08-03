@@ -1,7 +1,14 @@
 from django.db import models
-
+from django.contrib import admin
+from django.utils import timezone
+from django.utils.html import format_html
 # Create your models here.
 # тестовый класс
+class Cats(models.Model):
+    name = models.CharField(max_length=50)
+    age = models.IntegerField()
+    breed = models.CharField(max_length=50)
+
 
 
 # главный
@@ -19,6 +26,9 @@ class Advertisements(models.Model):
     update_at = models.DateTimeField(auto_now=True)
     
     
+
+
+
 
 
     # представление в виде строки 
