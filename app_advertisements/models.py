@@ -39,27 +39,7 @@ class Advertisements(models.Model):
     class Meta:
         db_table = 'advertisements' # переименовали таблицу 
 
-    #если запись была создана сегодня то она будет зеленого цвета
-    @admin.display(description='дата создания')
-    def created_date(self):
-        if self.created_at.date() == timezone.now().date():#проверяю что запись была создана сегодня
-            created_time = self.created_at.time().strftime('%H:%M:%S') #формат 17:14:25
-            return format_html(
-                '<span style="color:green; font-weight:bold">сегодня в {}</span>',created_time
-            )
-        return self.created_at.strftime('%d.%m.%Y at %H:%M:%S') #формат 03.08.2023 at 17:14:25
 
-
-
-    #если запись была создана сегодня то она будет зеленого цвета
-    @admin.display(description='дата обновления')
-    def update_date(self):
-        if self.update_at.date() == timezone.now().date():#проверяю что запись была создана сегодня
-            update_time = self.update_at.time().strftime('%H:%M:%S') #формат 17:14:25
-            return format_html(
-                '<span style="color:green; font-weight:bold">сегодня в {}</span>',update_time
-            )
-        return self.update_at.strftime('%d.%m.%Y at %H:%M:%S') #формат 03.08.2023 at 17:14:25
 
 
 
