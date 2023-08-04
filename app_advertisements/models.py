@@ -22,6 +22,7 @@ class Cats(models.Model):
 # заголовок - описание - цена - дата создания - дата обновления - тогр
 
 
+
 class Advertisements(models.Model):
     title = models.CharField('заголовок',max_length=100)
     description = models.TextField('описание')

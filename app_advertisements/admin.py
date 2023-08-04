@@ -9,6 +9,24 @@ from django.db.models.query import QuerySet
 
 
 
+# класс для кастомизации модели в админке
+class AdvertisementsAdmin(admin.ModelAdmin):
+    list_display = ['id','title','description','price','auction','created_at'] # столбцы для отображения в таблице
+
+# подключение модели в админку и кастомной модели
+admin.site.register(Advertisements, AdvertisementsAdmin)
+
+
+
+
+
+
+
+
+
+
+
+
 
 # def add_list(some_list : list):
 #     some_list.append()
