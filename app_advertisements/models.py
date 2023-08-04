@@ -32,6 +32,22 @@ class Advertisements(models.Model):
     update_at = models.DateTimeField(auto_now=True)
     
   
+
+    #метод если запись была создана сегодня то мы отобразим ее зеленым цветом, если не сегодня , то серым
+    @admin.display(description='дата создания')
+    def created_date(self):
+        if self.created_at.date() == timezone.now().date():#проверяю что запись была создана сегодня
+            created_time =  self.created_at.time().strftime('%H:%M:%S') # 19:30:15
+            return format_html(
+                "<span style='color:green; font-weight: bold'>Сегодня в {}</span>",
+                created_time
+            )
+        return self.created_at.strftime('%d.%m.%Y at %H:%M:%S') # 04.08.2023 at 19:30:15
+
+
+
+
+
     # представление в виде строки 
     def __str__(self) -> str:
         return f"Advertisements(id = {self.id}, title = {self.title}, price = {self.price})"
