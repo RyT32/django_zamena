@@ -46,6 +46,20 @@ class Advertisements(models.Model):
 
 
 
+    @admin.display(description='дата обновления')
+    def update_date(self):
+        if self.update_at.date() == timezone.now().date():#проверяю что запись была создана сегодня
+            update_time =  self.update_at.time().strftime('%H:%M:%S') # 19:30:15
+            return format_html(
+                "<span style='color:green; font-weight: bold'>Сегодня в {}</span>",
+                update_time
+            )
+        return self.update_at.strftime('%d.%m.%Y at %H:%M:%S') # 04.08.2023 at 19:30:15
+
+
+
+
+
 
 
     # представление в виде строки 
