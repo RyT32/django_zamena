@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model # получаем мродель пользователей
 
         # модули для настройки методов админки
 from django.contrib import admin
@@ -21,15 +22,18 @@ class Cats(models.Model):
 # py manage.py migrate
 # заголовок - описание - цена - дата создания - дата обновления - тогр
 
+User = get_user_model()
 
 
 class Advertisements(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     title = models.CharField('заголовок',max_length=100)
     description = models.TextField('описание')
     price = models.DecimalField('цена',max_digits=10, decimal_places=2)
     auction = models.BooleanField("торг", help_text='Возможен торг или нет',default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+    image = models.ImageField('изображение', upload_to='advertisements/')
     
   
 
@@ -57,6 +61,16 @@ class Advertisements(models.Model):
         return self.update_at.strftime('%d.%m.%Y at %H:%M:%S') # 04.08.2023 at 19:30:15
 
 
+
+    @admin.display(description='Фото')
+    def photo(self):
+        if self.image:#проверяю что запись была создана сегодня
+            return format_html(
+                "<img src='{}' width = '100px'>",
+                self.image.url
+            )
+        return  format_html(
+                "<img src='http://127.0.0.1:8000/media/advertisements/no_image.jpg' width = '100px'>")
 
 
 

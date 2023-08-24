@@ -11,13 +11,15 @@ from django.db.models.query import QuerySet
 
 # класс для кастомизации модели в админке
 class AdvertisementsAdmin(admin.ModelAdmin):
-    list_display = ['id','title','description','price','auction', 'created_date', 'update_date'] # столбцы для отображения в таблице
+    list_display = ['id','user','title','description','price','auction', 'created_date', 'update_date', 'photo'] # столбцы для отображения в таблице
     list_filter = ['auction','created_at','price'] # столбцы по которым будет фильтрация
     actions = ['make_action_as_false','make_action_as_true'] # методы для выбюранных записей
+    search_fields = ['title'] #поиск
+    date_hierarchy = 'created_at'
     fieldsets = (
         ('Общие', { # блок 1 
             "fields": (
-                'title','description'    # поля блока
+                'title','description','user', 'image'    # поля блока
             ),
         }),
         ('Финансы', { # блок 2

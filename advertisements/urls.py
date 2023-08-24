@@ -19,6 +19,9 @@ from django.urls import path, include
 # импортировать представления ДЗ
 from lesson_4.views import lesson_4
 
+# 
+from django.conf import settings # настройки
+from django.conf.urls.static import static # функцмия для создания автоматических ссылок
 
 
 urlpatterns = [
@@ -26,6 +29,10 @@ urlpatterns = [
     path('lesson_4/',lesson_4),
     path('', include('app_advertisements.urls'))
 ]
+
+
+if settings.DEBUG: # если дебаггинг включен
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT) # подключаю ссылки медиа файлов
 
 
 
