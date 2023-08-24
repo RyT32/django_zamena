@@ -7,6 +7,9 @@ from .models import Advertisements
 from .forms import AdvertisementForm
 
 
+from django.contrib.auth.decorators import login_required # если пользователь не авторизован перенаправляем его
+from django.urls import reverse_lazy # как reverse но только ленивая функция
+
 
 # функция представление
 def index(request):
@@ -17,6 +20,7 @@ def index(request):
 def top_sellers(request):
     return render(request, "top-sellers.html")
 
+@login_required(login_url=reverse_lazy('login'))
 def post_adv(request: WSGIRequest):
     
     print('request.GET',request.GET)
@@ -48,8 +52,6 @@ def post_adv(request: WSGIRequest):
 
 
 
-def top_sellers(request):
-    return render(request, "top-sellers.html")
 
 
 def test(request):
