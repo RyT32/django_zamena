@@ -27,7 +27,9 @@ from django.conf.urls.static import static # функцмия для созда�
 urlpatterns = [
     path('admin/', admin.site.urls), # ссылка для панели админа
     path('lesson_4/',lesson_4),
-    path('', include('app_advertisements.urls'))
+    path('', include('app_advertisements.urls')),
+    path('auth/', include('app_auth.urls')),
+
 ]
 
 
